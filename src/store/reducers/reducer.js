@@ -1,7 +1,21 @@
 import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
-  helloText: "Hello World"
+  todos: [
+    {
+      id: "1",
+      userId: "1",
+      completed: false,
+      text: "My First Todo"
+    },
+    {
+      id: "2",
+      userId: "1",
+      completed: false,
+      text: "Style this up"
+    }
+  ],
+  userId: "1"
 };
 
 const reducer = (state = initialState, action) => {
