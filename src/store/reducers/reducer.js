@@ -6,11 +6,6 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SAMPLE_ACTION:
-      return {
-        ...state,
-        helloText: "Clicked"
-      };
     default:
       return state;
   }
