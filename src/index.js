@@ -1,9 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
 
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
+import reducer from "./store/reducers/reducer";
 
 const muiTheme = createMuiTheme({
   typography: {
@@ -19,9 +22,13 @@ const muiTheme = createMuiTheme({
   }
 });
 
+const reduxStore = createStore(reducer);
+
 const app = (
   <MuiThemeProvider theme={muiTheme}>
-    <App />
+    <Provider store={reduxStore}>
+      <App />
+    </Provider>
   </MuiThemeProvider>
 );
 
