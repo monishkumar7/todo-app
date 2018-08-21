@@ -11,7 +11,10 @@ import reducer from "./store/reducers/todos";
 
 const muiTheme = createMuiTheme({
   typography: {
-    fontFamily: ["Cabin", "sans-serif"].join(",")
+    fontFamily: ["Cabin", "sans-serif"].join(","),
+    body1: {
+      fontSize: 14
+    }
   },
   palette: {
     primary: {
@@ -19,7 +22,8 @@ const muiTheme = createMuiTheme({
     },
     secondary: {
       main: "#EF4339"
-    }
+    },
+    icon: "#707070"
   }
 });
 

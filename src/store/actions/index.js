@@ -1,1 +1,6 @@
-export { completeTodo, undoCompleteTodo } from "./todos";
+export {
+  completeTodo,
+  undoCompleteTodo,
+  createTodo,
+  deleteTodo
+} from "./todos";
