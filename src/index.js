@@ -7,7 +7,7 @@ import thunk from "redux-thunk";
 
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
-import reducer from "./store/reducers/reducer";
+import reducer from "./store/reducers/todos";
 
 const muiTheme = createMuiTheme({
   typography: {

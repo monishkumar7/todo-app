@@ -1,0 +1,2 @@
+export const COMPLETE_TASK = "COMPLETE_TASK";
+export const UNDO_COMPLETE_TASK = "UNDO_COMPLETE_TASK";

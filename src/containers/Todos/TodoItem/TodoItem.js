@@ -11,7 +11,10 @@ const styles = {
 
 const todoItem = props => {
   return (
-    <Card className={props.classes.todoCard}>
+    <Card
+      onClick={props.status ? props.undoComplete : props.complete}
+      className={props.classes.todoCard}
+    >
       {props.id}
       {props.text}
     </Card>
