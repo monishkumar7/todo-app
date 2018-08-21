@@ -8,12 +8,12 @@ class Todos extends Component {
   render() {
     const todos = this.props.todos.map(todoItem => (
       <TodoItem
-        key={todoItem.taskId}
-        id={todoItem.taskId}
+        key={todoItem.todoId}
+        id={todoItem.todoId}
         text={todoItem.text}
         status={todoItem.completed}
-        complete={() => this.props.onCompleteTask(todoItem.taskId)}
-        undoComplete={() => this.props.onUndoCompleteTask(todoItem.taskId)}
+        complete={() => this.props.onCompleteTodo(todoItem.todoId)}
+        undoComplete={() => this.props.onUndoCompleteTodo(todoItem.todoId)}
       />
     ));
     return todos;
@@ -28,9 +28,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onCompleteTask: taskId => dispatch(actionCreators.completeTask(taskId)),
-    onUndoCompleteTask: taskId =>
-      dispatch(actionCreators.undoCompleteTask(taskId))
+    onCompleteTodo: todoId => dispatch(actionCreators.completeTodo(todoId)),
+    onUndoCompleteTodo: todoId =>
+      dispatch(actionCreators.undoCompleteTodo(todoId))
   };
 };
 

@@ -3,13 +3,13 @@ import * as actionTypes from "../actions/actionTypes";
 const initialState = {
   todos: [
     {
-      taskId: "1",
+      todoId: "1",
       userId: "1",
       completed: false,
       text: "My First Todo"
     },
     {
-      taskId: "2",
+      todoId: "2",
       userId: "1",
       completed: false,
       text: "Style this up"
@@ -18,11 +18,11 @@ const initialState = {
   userId: "1"
 };
 
-const completeTask = (state, action) => {
+const completeTodo = (state, action) => {
   return {
     ...state,
     todos: state.todos.map(todoItem => {
-      if (todoItem.taskId === action.taskId) {
+      if (todoItem.todoId === action.todoId) {
         return {
           ...todoItem,
           completed: true
@@ -34,11 +34,11 @@ const completeTask = (state, action) => {
   };
 };
 
-const undoCompleteTask = (state, action) => {
+const undoCompleteTodo = (state, action) => {
   return {
     ...state,
     todos: state.todos.map(todoItem => {
-      if (todoItem.taskId === action.taskId) {
+      if (todoItem.todoId === action.todoId) {
         return {
           ...todoItem,
           completed: false
@@ -52,10 +52,10 @@ const undoCompleteTask = (state, action) => {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.COMPLETE_TASK:
-      return completeTask(state, action);
-    case actionTypes.UNDO_COMPLETE_TASK:
-      return undoCompleteTask(state, action);
+    case actionTypes.COMPLETE_TODO:
+      return completeTodo(state, action);
+    case actionTypes.UNDO_COMPLETE_TODO:
+      return undoCompleteTodo(state, action);
     default:
       return state;
   }

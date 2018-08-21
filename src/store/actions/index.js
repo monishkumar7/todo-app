@@ -1,1 +1,1 @@
-export { completeTask, undoCompleteTask } from "./todos";
+export { completeTodo, undoCompleteTodo } from "./todos";

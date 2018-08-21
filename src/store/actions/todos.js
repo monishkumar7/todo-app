@@ -1,15 +1,15 @@
 import * as actionTypes from "./actionTypes";
 
-export const completeTask = taskId => {
+export const completeTodo = todoId => {
   return {
-    type: actionTypes.COMPLETE_TASK,
-    taskId: taskId
+    type: actionTypes.COMPLETE_TODO,
+    todoId: todoId
   };
 };
 
-export const undoCompleteTask = taskId => {
+export const undoCompleteTodo = todoId => {
   return {
-    type: actionTypes.UNDO_COMPLETE_TASK,
-    taskId: taskId
+    type: actionTypes.UNDO_COMPLETE_TODO,
+    todoId: todoId
   };
 };
