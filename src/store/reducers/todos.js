@@ -1,20 +1,7 @@
 import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
-  todos: [
-    {
-      todoId: 1,
-      text: "My First Todo",
-      userId: 1,
-      completed: false
-    },
-    {
-      todoId: 2,
-      text: "Style this up",
-      userId: 1,
-      completed: false
-    }
-  ],
+  todos: [],
   userId: "1"
 };
 
@@ -73,6 +60,24 @@ const deleteTodo = (state, action) => {
   };
 };
 
+const fetchTodoSuccess = (state, action) => {
+  const newArray = [];
+  action.todoData.forEach(incomingItem => {
+    newArray.push({
+      todoId: incomingItem.name.substring(
+        incomingItem.name.lastIndexOf("/") + 1
+      ),
+      text: incomingItem.fields.text.stringValue,
+      userId: incomingItem.fields.userId.stringValue,
+      completed: incomingItem.fields.completed.booleanValue
+    });
+  });
+  return {
+    ...state,
+    todos: newArray
+  };
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.COMPLETE_TODO:
@@ -83,6 +88,8 @@ const reducer = (state = initialState, action) => {
       return createTodo(state, action);
     case actionTypes.DELETE_TODO:
       return deleteTodo(state, action);
+    case actionTypes.FETCH_TODO_SUCCESS:
+      return fetchTodoSuccess(state, action);
     default:
       return state;
   }

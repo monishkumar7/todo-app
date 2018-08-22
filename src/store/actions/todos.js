@@ -84,3 +84,26 @@ export const deleteTodo = todoId => {
     todoId: todoId
   };
 };
+
+export const fetchTodosAPI = () => {
+  return dispatch => {
+    axios
+      .get(
+        "https://firestore.googleapis.com/v1beta1/projects/todo-app-7/databases/(default)/documents/todos"
+      )
+      .then(response => {
+        console.log(response);
+        dispatch(fetchTodosSuccess(response.data.documents));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+};
+
+export const fetchTodosSuccess = todoData => {
+  return {
+    type: actionTypes.FETCH_TODO_SUCCESS,
+    todoData: todoData
+  };
+};

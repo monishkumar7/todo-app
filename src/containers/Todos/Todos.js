@@ -6,6 +6,9 @@ import * as actionCreators from "../../store/actions";
 import { Button, Typography, Grid } from "@material-ui/core";
 
 class Todos extends Component {
+  componentDidMount = () => {
+    this.props.onFetchTodos();
+  };
   render() {
     const todos = this.props.todos.map(todoItem => (
       <TodoItem
@@ -63,7 +66,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(actionCreators.undoCompleteTodo(todoId)),
     onCreateTodoAPI: (text, userId) =>
       dispatch(actionCreators.createTodoAPI(text, userId)),
-    onDeleteTodoAPI: todoId => dispatch(actionCreators.deleteTodoAPI(todoId))
+    onDeleteTodoAPI: todoId => dispatch(actionCreators.deleteTodoAPI(todoId)),
+    onFetchTodos: () => dispatch(actionCreators.fetchTodosAPI())
   };
 };
 
