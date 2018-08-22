@@ -4,15 +4,15 @@ const initialState = {
   todos: [
     {
       todoId: 1,
+      text: "My First Todo",
       userId: 1,
-      completed: false,
-      text: "My First Todo"
+      completed: false
     },
     {
       todoId: 2,
+      text: "Style this up",
       userId: 1,
-      completed: false,
-      text: "Style this up"
+      completed: false
     }
   ],
   userId: "1"
@@ -54,10 +54,10 @@ const createTodo = (state, action) => {
   return {
     ...state,
     todos: state.todos.concat({
-      todoId: state.todos.length + 1,
+      todoId: action.todoId,
+      text: action.text,
       userId: action.userId,
-      completed: false,
-      text: action.text
+      completed: false
     })
   };
 };

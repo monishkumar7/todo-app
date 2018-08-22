@@ -1,6 +1,6 @@
 export {
   completeTodo,
   undoCompleteTodo,
-  createTodo,
-  deleteTodo
+  createTodoAPI,
+  deleteTodoAPI
 } from "./todos";

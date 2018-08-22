@@ -15,7 +15,7 @@ class Todos extends Component {
         status={todoItem.completed}
         complete={() => this.props.onCompleteTodo(todoItem.todoId)}
         undoComplete={() => this.props.onUndoCompleteTodo(todoItem.todoId)}
-        deleteTodo={() => this.props.onDeleteTodo(todoItem.todoId)}
+        deleteTodo={() => this.props.onDeleteTodoAPI(todoItem.todoId)}
       />
     ));
     return (
@@ -35,7 +35,7 @@ class Todos extends Component {
                 variant="contained"
                 color="primary"
                 onClick={() => {
-                  this.props.onCreateTodo(1, "New Todo");
+                  this.props.onCreateTodoAPI("New Todo", "1");
                 }}
               >
                 <Typography variant="button" color="inherit">
@@ -61,9 +61,9 @@ const mapDispatchToProps = dispatch => {
     onCompleteTodo: todoId => dispatch(actionCreators.completeTodo(todoId)),
     onUndoCompleteTodo: todoId =>
       dispatch(actionCreators.undoCompleteTodo(todoId)),
-    onCreateTodo: (userId, text) =>
-      dispatch(actionCreators.createTodo(userId, text)),
-    onDeleteTodo: todoId => dispatch(actionCreators.deleteTodo(todoId))
+    onCreateTodoAPI: (text, userId) =>
+      dispatch(actionCreators.createTodoAPI(text, userId)),
+    onDeleteTodoAPI: todoId => dispatch(actionCreators.deleteTodoAPI(todoId))
   };
 };
 
