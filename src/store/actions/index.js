@@ -1,7 +1,1 @@
-export {
-  completeTodo,
-  undoCompleteTodo,
-  createTodoAPI,
-  deleteTodoAPI,
-  fetchTodosAPI
-} from "./todos";
+export { createTodo, fetchTodos, updateTodo, deleteTodo } from "./todos";

@@ -9,6 +9,25 @@ class Todos extends Component {
   componentDidMount = () => {
     this.props.onFetchTodos();
   };
+
+  completeTodo = todoItem => {
+    this.props.onUpdateTodo({
+      todoId: todoItem.todoId,
+      text: todoItem.text,
+      completed: true,
+      userId: todoItem.userId
+    });
+  };
+
+  undoCompleteTodo = todoItem => {
+    this.props.onUpdateTodo({
+      todoId: todoItem.todoId,
+      text: todoItem.text,
+      completed: false,
+      userId: todoItem.userId
+    });
+  };
+
   render() {
     const todos = this.props.todos.map(todoItem => (
       <TodoItem
@@ -16,9 +35,9 @@ class Todos extends Component {
         id={todoItem.todoId}
         text={todoItem.text}
         status={todoItem.completed}
-        complete={() => this.props.onCompleteTodo(todoItem.todoId)}
-        undoComplete={() => this.props.onUndoCompleteTodo(todoItem.todoId)}
-        deleteTodo={() => this.props.onDeleteTodoAPI(todoItem.todoId)}
+        complete={() => this.completeTodo(todoItem)}
+        undoComplete={() => this.undoCompleteTodo(todoItem)}
+        deleteTodo={() => this.props.onDeleteTodo(todoItem.todoId)}
       />
     ));
     return (
@@ -38,7 +57,7 @@ class Todos extends Component {
                 variant="contained"
                 color="primary"
                 onClick={() => {
-                  this.props.onCreateTodoAPI("New Todo", "1");
+                  this.props.onCreateTodo("New Todo", "1");
                 }}
               >
                 <Typography variant="button" color="inherit">
@@ -61,13 +80,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onCompleteTodo: todoId => dispatch(actionCreators.completeTodo(todoId)),
-    onUndoCompleteTodo: todoId =>
-      dispatch(actionCreators.undoCompleteTodo(todoId)),
-    onCreateTodoAPI: (text, userId) =>
-      dispatch(actionCreators.createTodoAPI(text, userId)),
-    onDeleteTodoAPI: todoId => dispatch(actionCreators.deleteTodoAPI(todoId)),
-    onFetchTodos: () => dispatch(actionCreators.fetchTodosAPI())
+    onCreateTodo: (text, userId) =>
+      dispatch(actionCreators.createTodo(text, userId)),
+    onFetchTodos: () => dispatch(actionCreators.fetchTodos()),
+    onUpdateTodo: todoData => dispatch(actionCreators.updateTodo(todoData)),
+    onDeleteTodo: todoId => dispatch(actionCreators.deleteTodo(todoId))
   };
 };
 
