@@ -1,20 +1,25 @@
 import React, { Component } from "react";
-import { Typography } from "@material-ui/core";
+import { BrowserRouter } from "react-router-dom";
 
-import Todos from "./containers/Todos/Todos";
 import Layout from "./components/Layout/Layout";
+import Home from "./containers/Home/Home";
 
 //TODO:
 //2. Add Authentication
 //3. Add Lists?
 
 class App extends Component {
+  state = {
+    isAuthenticated: false
+  };
+
   render() {
     return (
-      <Layout>
-        <Typography variant="display1">ToDo App</Typography>
-        <Todos />
-      </Layout>
+      <BrowserRouter>
+        <Layout auth={this.state.isAuthenticated}>
+          <Home />
+        </Layout>
+      </BrowserRouter>
     );
   }
 }
