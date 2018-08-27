@@ -1,9 +1,11 @@
-import React from "react";
-import { Card, Typography, Grid } from "@material-ui/core";
+import React, { Component, Fragment } from "react";
+import { Card, Typography, Grid, TextField } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import CheckBoxBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Create";
+import SaveIcon from "@material-ui/icons/Save";
 
 const styles = theme => ({
   todoCard: {
@@ -24,37 +26,88 @@ const styles = theme => ({
   }
 });
 
-const todoItem = props => {
-  const { classes } = props;
-  return (
-    <Grid container>
-      <Grid item xs={12}>
-        <Card className={classes.todoCard}>
-          <Grid container alignItems="center">
-            <Grid item xs={10}>
-              <Typography
-                onClick={props.status ? props.undoComplete : props.complete}
-                className={classes.text}
-                variant="body1"
-              >
-                {props.text}
-              </Typography>
-            </Grid>
-            <Grid item xs={1} className={classes.iconWrap}>
-              {props.status ? (
-                <CheckBoxIcon className={classes.icon} />
-              ) : (
-                <CheckBoxBlankIcon className={classes.icon} />
-              )}
-            </Grid>
-            <Grid item xs={1} className={classes.iconWrap}>
-              <DeleteIcon onClick={props.deleteTodo} className={classes.icon} />
-            </Grid>
-          </Grid>
-        </Card>
-      </Grid>
-    </Grid>
-  );
-};
+class TodoItem extends Component {
+  state = {
+    editMode: false
+  };
 
-export default withStyles(styles)(todoItem);
+  editModeToggleHandler = () => {
+    this.setState({ editMode: !this.state.editMode });
+  };
+
+  handleTextChange = () => {
+    console.log("Text change");
+  };
+
+  render() {
+    const { classes } = this.props;
+
+    const viewContent = (
+      <Fragment>
+        <Grid item xs={9}>
+          <Typography
+            onClick={
+              this.props.status ? this.props.undoComplete : this.props.complete
+            }
+            className={classes.text}
+            variant="body1"
+          >
+            {this.props.text}
+          </Typography>
+        </Grid>
+        <Grid item xs={1} className={classes.iconWrap}>
+          {this.props.status ? (
+            <CheckBoxIcon className={classes.icon} />
+          ) : (
+            <CheckBoxBlankIcon className={classes.icon} />
+          )}
+        </Grid>
+        <Grid item xs={1} className={classes.iconWrap}>
+          <DeleteIcon
+            onClick={this.props.deleteTodo}
+            className={classes.icon}
+          />
+        </Grid>
+        <Grid item xs={1} className={classes.iconWrap}>
+          <EditIcon
+            onClick={this.editModeToggleHandler}
+            className={classes.icon}
+          />
+        </Grid>
+      </Fragment>
+    );
+
+    const editContent = (
+      <Fragment>
+        <Grid item xs={10}>
+          <TextField value={this.props.text} onChange={this.handleTextChange} />
+        </Grid>
+        <Grid item xs={1} className={classes.iconWrap}>
+          <DeleteIcon
+            onClick={this.props.deleteTodo}
+            className={classes.icon}
+          />
+        </Grid>
+        <Grid item xs={1} className={classes.iconWrap}>
+          <SaveIcon
+            onClick={this.editModeToggleHandler}
+            className={classes.icon}
+          />
+        </Grid>
+      </Fragment>
+    );
+    return (
+      <Grid container>
+        <Grid item xs={12}>
+          <Card className={classes.todoCard}>
+            <Grid container alignItems="center">
+              {this.state.editMode ? editContent : viewContent}
+            </Grid>
+          </Card>
+        </Grid>
+      </Grid>
+    );
+  }
+}
+
+export default withStyles(styles)(TodoItem);

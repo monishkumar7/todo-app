@@ -30,11 +30,9 @@ export const createTodo = (text, userId) => {
         data
       )
       .then(response => {
-        console.log(response);
         dispatch(createTodoSuccess(response.data));
       })
       .catch(error => {
-        console.log(error);
         dispatch(createTodoFail());
       });
   };
@@ -67,11 +65,9 @@ export const fetchTodos = () => {
         "https://firestore.googleapis.com/v1beta1/projects/todo-app-7/databases/(default)/documents/todos"
       )
       .then(response => {
-        console.log(response);
         dispatch(fetchTodosSuccess(response.data.documents));
       })
       .catch(error => {
-        console.log(error);
         dispatch(fetchTodosFail());
       });
   };
@@ -119,11 +115,9 @@ export const updateTodo = updateObject => {
         data
       )
       .then(response => {
-        console.log(response);
         dispatch(updateTodoSuccess(response.data));
       })
       .catch(error => {
-        console.log(error);
         dispatch(updateTodoFail());
       });
   };
@@ -157,11 +151,9 @@ export const deleteTodo = todoId => {
           todoId
       )
       .then(response => {
-        console.log(response);
         dispatch(deleteTodoSuccess(todoId));
       })
       .catch(error => {
-        console.log(error);
         dispatch(deleteTodoFail());
       });
   };
