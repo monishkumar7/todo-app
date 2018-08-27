@@ -28,15 +28,21 @@ const styles = theme => ({
 
 class TodoItem extends Component {
   state = {
-    editMode: false
+    editMode: false,
+    todoText: this.props.text
   };
 
   editModeToggleHandler = () => {
-    this.setState({ editMode: !this.state.editMode });
+    this.setState({ editMode: true });
   };
 
-  handleTextChange = () => {
-    console.log("Text change");
+  textChangeHandler = event => {
+    this.setState({ todoText: event.target.value });
+  };
+
+  saveButtonHandler = () => {
+    this.props.saved(this.state.todoText);
+    this.setState({ editMode: false });
   };
 
   render() {
@@ -52,7 +58,7 @@ class TodoItem extends Component {
             className={classes.text}
             variant="body1"
           >
-            {this.props.text}
+            {this.state.todoText}
           </Typography>
         </Grid>
         <Grid item xs={1} className={classes.iconWrap}>
@@ -80,7 +86,10 @@ class TodoItem extends Component {
     const editContent = (
       <Fragment>
         <Grid item xs={10}>
-          <TextField value={this.props.text} onChange={this.handleTextChange} />
+          <TextField
+            value={this.state.todoText}
+            onChange={event => this.textChangeHandler(event)}
+          />
         </Grid>
         <Grid item xs={1} className={classes.iconWrap}>
           <DeleteIcon
@@ -89,10 +98,7 @@ class TodoItem extends Component {
           />
         </Grid>
         <Grid item xs={1} className={classes.iconWrap}>
-          <SaveIcon
-            onClick={this.editModeToggleHandler}
-            className={classes.icon}
-          />
+          <SaveIcon onClick={this.saveButtonHandler} className={classes.icon} />
         </Grid>
       </Fragment>
     );

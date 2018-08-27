@@ -28,6 +28,15 @@ class Todos extends Component {
     });
   };
 
+  saved = (todoItem, updatedText) => {
+    this.props.onUpdateTodo({
+      todoId: todoItem.todoId,
+      text: updatedText,
+      completed: false,
+      userId: todoItem.userId
+    });
+  };
+
   render() {
     const todos = this.props.todos.map(todoItem => (
       <TodoItem
@@ -38,6 +47,7 @@ class Todos extends Component {
         complete={() => this.completeTodo(todoItem)}
         undoComplete={() => this.undoCompleteTodo(todoItem)}
         deleteTodo={() => this.props.onDeleteTodo(todoItem.todoId)}
+        saved={updatedText => this.saved(todoItem, updatedText)}
       />
     ));
     return (
